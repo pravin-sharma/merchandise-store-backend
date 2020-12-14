@@ -1,1 +1,1 @@
-# merchandise-store
+# Merchandise Store using MERN Stack
