@@ -1,1 +1,1 @@
-# Merchandise Store using MERN Stack
+# Merchandise Store Backend using MongoDb,Express,Nodejs
