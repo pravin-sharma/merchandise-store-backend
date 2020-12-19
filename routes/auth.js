@@ -12,6 +12,21 @@ router.post('/signup', [
     check('password').isLength({min:3}).withMessage('Paswword should have minimum length of 3')
 ], authController.signup);
 
+router.post('/signin', [
+    check('email').isEmail().withMessage('Email should be in proper format'),
+    check('password').isLength({min:1}).withMessage('Paswword is required')
+], authController.signin);
+
 router.get('/signout', authController.signOut);
+
+// protected routes
+
+router.get('/testprotectedroute', authController.isSignedIn , (req,res,next)=>{
+    res.json({
+        message: "Is Signed In"
+    })
+})
+
+
 
 module.exports = router;

@@ -27,7 +27,6 @@ let userSchema = new Schema({
         type: String,
         trim: true,
     },
-    //TODO: Comeback later
     encry_password: {
         type: String,
         required: true,
