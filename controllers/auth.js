@@ -54,7 +54,7 @@ exports.signin = (req,res,next) =>{
 
         //if email found, match the password
         if(user.authenticate(password)){
-            const { _id, name, email, role } = user
+            const { _id, name, lastname,  email, role, purchases } = user
 
             //Creating token
             const token = jwt.sign({'_id':_id}, process.env.SECRET);
@@ -68,8 +68,10 @@ exports.signin = (req,res,next) =>{
                 user: {
                     _id: _id,
                     name: name,
+                    lastname: lastname,
                     email: email,
-                    role: role
+                    role: role,
+                    purchases: purchases
                 }
             })
         }else{
