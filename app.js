@@ -33,7 +33,7 @@ app.use(cors())
 
 //My Routes
 app.use('/api', authRoutes);
-// app.use('/user',userRoutes);
+app.use('/api', userRoutes);
 
 //Server
 app.listen(port, () => {
