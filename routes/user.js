@@ -2,16 +2,20 @@
 const express = require('express')
 const router = express.Router();
 
-const userController = require('../controllers/user');
-const authController = require('../controllers/auth');
+const {getUserById , getUser, updateUser, userPurchaseList} = require('../controllers/user');
+const {isAuthenticated, isSignedIn } = require('../controllers/auth');
 
-router.param('userId', userController.getUserById);
+//middleware for passing user object into req.
+router.param('userId', getUserById);
 
-router.get('/user/:userId', authController.isSignedIn, authController.isAuthenticated, userController.getUser);
+//get user
+router.get('/user/:userId', isSignedIn, isAuthenticated, getUser);
 
-router.put('/user/:userId', authController.isSignedIn, authController.isAuthenticated, userController.updateUser);
+// update user
+router.put('/user/:userId', isSignedIn, isAuthenticated, updateUser);
 
-router.get('user/orders/:userId', authController.isSignedIn, authController.isAuthenticated, userController.userPurchaseList)
+// get user purchase list
+router.get('user/orders/:userId', isSignedIn, isAuthenticated, userPurchaseList)
 
 
 module.exports = router;

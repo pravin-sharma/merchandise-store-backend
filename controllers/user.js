@@ -1,6 +1,6 @@
 
 const User = require('../models/user');
-const Order = require('../models/order');
+const {Order, ProductCart} = require('../models/orderAndProductCart');
 
 exports.getUserById = (req, res, next, id) => {
     User.findById(id, (err, user) => {
@@ -41,13 +41,13 @@ exports.updateUser = (req, res, next) => {
             user.createdAt = undefined;
             user.updatedAt = undefined;
 
-            res.json(user);
+            return res.json(user);
         }
     )
 }
 
 exports.userPurchaseList = (req,res,next)=>{
-    Order.Order.find({user: req.profile._id})
+    Order.find({user: req.profile._id})
     .populate("user", "_id name")
     .exec((err, order)=>{
         if(err){
@@ -60,7 +60,6 @@ exports.userPurchaseList = (req,res,next)=>{
 }
 
 exports.pushOrderInPurchaseList = (req,res,next) =>{
-
     let purchases = [];
 //will come from frontend
     req.body.order.products.forEach(product=>{
@@ -74,7 +73,6 @@ exports.pushOrderInPurchaseList = (req,res,next) =>{
             transaction_id: req.body.order.transaction_id
         })
     })
-
     //store this in user db
     User.findOneAndUpdate(
         {_id: req.profile._id},
