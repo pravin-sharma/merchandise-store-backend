@@ -17,7 +17,7 @@ router.get('/category/allCategory', getAllCategory);
 router.get('/category/:categoryId', getCategory);
 
 //creating category //admin only
-router.post('/category/:userId', 
+router.post('/category/create/:userId', 
     isSignedIn, 
     isAuthenticated, 
     isAdmin, 

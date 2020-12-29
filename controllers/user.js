@@ -19,12 +19,12 @@ exports.getUserById = (req, res, next, id) => {
     })
 }
 
-exports.getUser = (req, res, next) => {
+exports.getUser = (req, res) => {
 
     return res.status(200).json(req.profile)
 }
 
-exports.updateUser = (req, res, next) => {
+exports.updateUser = (req, res) => {
     //req.body
     User.findByIdAndUpdate(
         { _id: req.profile._id },
@@ -46,7 +46,7 @@ exports.updateUser = (req, res, next) => {
     )
 }
 
-exports.userPurchaseList = (req,res,next)=>{
+exports.userPurchaseList = (req,res)=>{
     Order.find({user: req.profile._id})
     .populate("user", "_id name")
     .exec((err, order)=>{
