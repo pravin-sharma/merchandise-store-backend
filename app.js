@@ -12,7 +12,7 @@ const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
 const orderRoutes = require('./routes/order');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 //console.log(process.env.PORT);
 const app = express();
 
