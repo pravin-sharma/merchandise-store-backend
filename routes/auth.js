@@ -19,12 +19,4 @@ router.post('/signin', [
 
 router.get('/signout', signOut);
 
-// protected routes
-
-router.get('/testprotectedroute', isSignedIn , (req,res,next)=>{
-    res.json({
-        message: "Is Signed In"
-    })
-})
-
 module.exports = router;
