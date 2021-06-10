@@ -15,7 +15,10 @@ exports.getCategoryById = (req,res,next,id) =>{
 }
 
 exports.createCategory = (req,res,next) =>{
-    const category = new Category(req.body);
+    const {categoryName} = req.body;
+    const category = new Category({
+        name: categoryName
+    });
     category.save()
     .then((data, err)=>{
         if(err){
