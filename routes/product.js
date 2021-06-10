@@ -12,6 +12,11 @@ const {isSignedIn, isAuthenticated, isAdmin} = require('../controllers/auth');
 router.param('userId', getUserById);
 router.param('productId', getProductById);
 
+//get all products
+router.get('/product/getAllProducts', getAllProducts);
+
+//get unique categories
+router.get('/product/categories', getAllUniqueCategories);
 
 //get a product
 router.get('/product/:productId', getProduct);
@@ -28,11 +33,7 @@ router.put('/product/:productId/:userId', isSignedIn, isAuthenticated, isAdmin, 
 //delete a product //admin
 router.delete('/product/:productId/:userId', isSignedIn, isAuthenticated, isAdmin, removeProduct);
 
-//get all products
-router.get('/product/getAllProducts', getAllProducts);
 
-//get unique categories
-router.get('/product/categories', getAllUniqueCategories);
 
 
 module.exports = router;
