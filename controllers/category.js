@@ -15,10 +15,7 @@ exports.getCategoryById = (req,res,next,id) =>{
 }
 
 exports.createCategory = (req,res,next) =>{
-    const {categoryName} = req.body;
-    const category = new Category({
-        name: categoryName
-    });
+    const category = new Category(req.body);
     category.save()
     .then((data, err)=>{
         if(err){
@@ -56,14 +53,19 @@ exports.getAllCategory = (req,res,next) => {
 }
 
 exports.updateCategory = (req,res,next) =>{
-    //categoryId 
     const category = req.category;
     category.name = req.body.name;
 
-    category.save().then((category, err)=>{
+    category.save()
+    .then((category, err)=>{
+        if(err || !category){
+            return res.status(400).json({
+                err,
+                error: "No category found"
+            })
+        }
         return res.status(200).json({
-            category,
-            message: "Updated Category successfully"
+            category
         })
     })
 }
