@@ -57,7 +57,7 @@ exports.createProduct = (req, res) => {
     const form = new formidable.IncomingForm();
     form.keepExtensions = true
     form.parse(req, (err, fields, file) => {
-        console.log(fields, file);
+        // console.log("inside create product",fields, file);
         if (err) {
             return res.status(400).json({
                 err,
@@ -142,26 +142,28 @@ exports.removeProduct = (req, res) => {
 // update a product
 exports.updateProduct = (req, res) => {
     const form = new formidable.IncomingForm();
+    // console.log('inside updateProduct');
+    // console.log('req.product', req.product);
     form.keepExtensions = true
     form.parse(req, (err, fields, file) => {
-
+        // console.log("inside update product",fields, file);
         if (err) {
             return res.status(400).json({
                 err,
-                error: "Error while creating a product"
-            })
-        }
-
-        const { name, description, price, category } = fields;
-        if (!name || !description || !price || !category) {
-            return res.status(400).json({
-                error: "Field provided for adding new product is not valid"
+                error: "Error while updating a product"
             })
         }
 
         //updation code
-        const product = req.product;
+        let product = req.product;
         product = _.extend(product, fields);
+
+        const { name, description, price, category } = product;
+        if (!name || !description || !price || !category) {
+            return res.status(400).json({
+                error: "Field provided for updating product is not valid"
+            })
+        }
 
         //handle file here
         if (file.photo) {
@@ -182,7 +184,7 @@ exports.updateProduct = (req, res) => {
                         error: "Updating product in db failed"
                     })
                 }
-
+                console.log('Product Updated');
                 return res.json({
                     message: "Product Updated in db",
                     updatedProduct
