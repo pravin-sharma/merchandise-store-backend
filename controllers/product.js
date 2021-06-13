@@ -139,7 +139,7 @@ exports.removeProduct = (req, res) => {
     })
 }
 
-// update a product
+// update a product //TODO: update photo pending
 exports.updateProduct = (req, res) => {
     const form = new formidable.IncomingForm();
     // console.log('inside updateProduct');
