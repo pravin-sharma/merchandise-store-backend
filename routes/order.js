@@ -12,17 +12,17 @@ router.param('orderId', getOrderById);
 
 //routes
 
-//create order
-router.post('order/create/:userId', isSignedIn, isAuthenticated, pushOrderInPurchaseList, updateStockAndSold, createOrder);
+//create order //User
+router.post('/order/create/:userId', isSignedIn, isAuthenticated, pushOrderInPurchaseList, updateStockAndSold, createOrder);
 
 // get all order // isAdmin
 router.get('/order/getAllOrders', isSignedIn, isAuthenticated, isAdmin, getAllOrders );
 
 // get types of order status available //admin
-router.get('order/status/:userId', isSignedIn, isAuthenticated, isAdmin, getOrderStatus )
+router.get('/order/status/:userId', isSignedIn, isAuthenticated, isAdmin, getOrderStatus )
 
 // update status of order by Admin
-router.put('order/:orderId/status/:userId', isSignedIn, isAuthenticated, isAdmin, updateOrderStatus)
+router.put('/order/:orderId/status/:userId', isSignedIn, isAuthenticated, isAdmin, updateOrderStatus)
 
 
 module.exports = router;
