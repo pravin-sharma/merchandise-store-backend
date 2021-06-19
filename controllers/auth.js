@@ -110,7 +110,6 @@ exports.signOut = (req, res, next) => {
 
 exports.isSignedIn = expressJwt({
     secret: process.env.SECRET,
-    // secret: 'aplha-beta-charlie',
     algorithms: ['HS256'],
     userProperty: "auth"
 })
