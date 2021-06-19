@@ -21,9 +21,6 @@ router.get('/product/categories', getAllUniqueCategories);
 //get a product
 router.get('/product/:productId', getProduct);
 
-//get product photo
-router.get('/product/photo/:productId', photo );
-
 //create a product //admin
 router.post('/product/create/:userId', isSignedIn, isAuthenticated, isAdmin, createProduct );
 
@@ -33,7 +30,8 @@ router.put('/product/:productId/:userId', isSignedIn, isAuthenticated, isAdmin, 
 //delete a product //admin
 router.delete('/product/:productId/:userId', isSignedIn, isAuthenticated, isAdmin, removeProduct);
 
-
+//get product photo
+router.get('/product/photo/:productId', photo );
 
 
 module.exports = router;
