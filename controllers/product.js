@@ -23,18 +23,22 @@ exports.getProductById = (req, res, next, id) => {
 }
 
 //middleware: update stock and sold data of a product
-exports.updateStockAndSold = (req, res, next) => {
+exports.updateStockAndSold = async(req, res, next) => {
 
-    let updateStockAndSoldOperation = req.body.order.products.map(prod => {
-        return {
-            updateOne: {
-                filter: { _id: prod._id },
-                update: { $inc: { stock: -prod.count, sold: +prod.count } }
+    try {
+        var updateStockAndSoldOperation = await req.body.order.products.map(prod => {
+            return {
+                updateOne: {
+                    filter: { _id: prod._id },
+                    update: { $inc: { stock: -prod.count, sold: +prod.count } }
+                }
             }
-        }
-    })
+        })
+    } catch (error) {
+        console.log(error);
+    }
 
-    Product.bulkWrite(updateStockAndSoldOperation)
+    await Product.bulkWrite(updateStockAndSoldOperation)
         .then((data, err) => {
             if (err) {
                 return res.status(400).json({
